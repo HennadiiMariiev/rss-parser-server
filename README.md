@@ -1,7 +1,7 @@
 # RSS Parser Server
 
 ## General
-This is a server-side application for parsing [Lifehacker RSS](https://lifehacker.com/rss).
+This is a simple server-side application for parsing [Lifehacker RSS](https://lifehacker.com/rss) feed.
 App is based on [express-framework](http://expressjs.com) and written on vanilla JS.
 
 ## App Stack
@@ -18,7 +18,8 @@ App is based on [express-framework](http://expressjs.com) and written on vanilla
 ## App Functionality
 This app parses **lifehacker RSS** for new posts by schedule and stores data in MongoDB. Unauthorized users can get all posts. Registered and authorized users (admins) can perform CRUD operations on posts, categories and creators.
 
+## Docker and Makefile
+This is containerized app. Please, check out Makefile with commands for quick application start. 
 
-
-__Please, feel free to use this repo))__ 
+### Please, feel free to use this repo)) 
 Clone it, install dependencies, paste your environment variables as in env-example file and run the APP.
