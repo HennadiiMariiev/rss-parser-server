@@ -19,3 +19,7 @@ down: ## stop all started for development containers LOCAL
 	$(docker_compose_bin) $(COMPOSE_CONFIG) down
 shell-once: ## start node container
 	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --user="$(CURRENT_USER_ID)" -p ${PORT}:${PORT} "node" bash
+run-start: ## start node container and start app
+	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --user="$(CURRENT_USER_ID)" -p ${PORT}:${PORT} "node" npm run start
+run-dev: ## start node container and start app in development mode
+	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --user="$(CURRENT_USER_ID)" -p ${PORT}:${PORT} "node" npm run dev
