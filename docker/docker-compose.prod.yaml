@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  &node-service node:
+    container_name: *node-service
+    hostname: *node-service
+    restart: unless-stopped
+    user: '1000:1000'
+    build: 
+      ./node
+    working_dir: "/home/node/app"
+    volumes: 
+      - "../www:/home/node/app"

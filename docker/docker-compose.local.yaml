@@ -1,0 +1,23 @@
+version: '3.7'
+
+# networks:
+#   internal:
+#   api:
+#     external: true
+
+services:
+  &node-service node:
+    container_name: *node-service
+    hostname: *node-service
+    restart: unless-stopped
+    user: '${CURRENT_USER_ID}:${CURRENT_USER_ID}'
+    build: 
+      ./node
+    environment:
+      - PORT=${PORT}
+    working_dir: "/home/node/app"
+    volumes: 
+      - "../www:/home/node/app"
+    # networks:
+    #   internal:
+    #   api:
