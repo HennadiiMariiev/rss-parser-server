@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+function createHtml(url) {
+  return `<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -114,7 +115,7 @@
             <h2 class="subtitle">You've successfully confirmed registration!</h2>
             <p class="text">You will be redirected to</p>
             <a href="https://www.google.com" class="link"
-              >https://cabbage-project.netlify.app</a
+              >${url}</a
             >
     
             <p class="text">
@@ -131,7 +132,7 @@
           setInterval(() => {
             counter.innerHTML -= 1;
             if (counter.innerHTML === "1") {
-              window.location.replace("https://cabbage-project.netlify.app");
+              window.location.replace("${url}");
             }
           }, 1000);
         };
@@ -139,4 +140,7 @@
         changeCounterAndRedirect();
        </script>
     </html>
-    
+    `;
+}
+
+module.exports = createHtml;

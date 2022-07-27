@@ -15,6 +15,7 @@ const {
   SMTP_PORT,
   SMTP_USER,
   RSS_NODE_SCHEDULE,
+  FRONTEND_APP_URL,
 } = process.env;
 
 const ALLOWED_DOMAINS = ['http://localhost:3000', 'http://localhost:4000', 'http://www.google.com'];
@@ -34,4 +35,5 @@ module.exports = {
   SMTP_PORT,
   SMTP_USER,
   RSS_NODE_SCHEDULE,
+  FRONTEND_APP_URL,
 };
