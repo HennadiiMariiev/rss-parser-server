@@ -2,7 +2,6 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 
-const { corsOptions } = require('./config/options');
 const { postsRouter } = require('./routes/posts.routes');
 const { adminRouter } = require('./routes/admin.routes');
 const { creatorsRouter } = require('./routes/creators.routes');
@@ -19,7 +18,7 @@ const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(logger(formatsLogger));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/posts', postsRouter);
