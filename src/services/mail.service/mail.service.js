@@ -1,16 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const {
-  PORT,
-  SMTP_HOST,
-  SMTP_PASSWORD,
-  SMTP_PORT,
-  SMTP_USER,
-  FRONTEND_APP_URL,
-  BACKEND_APP_URL = 'http://localhost:4000',
-} = require('../../config/config');
-
-const TEMP_URL = 'http://localhost:' + PORT;
+const { SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_USER, MODE, BACKEND_APP_URL } = require('../../config/config');
 
 class MailService {
   constructor() {
@@ -26,12 +16,13 @@ class MailService {
   }
 
   async sendActivationMail(to, verificationToken) {
+    const URL = MODE === 'production' ? BACKEND_APP_URL : 'http://localhost:4000';
     const res = await this.transporter.sendMail({
       from: SMTP_USER,
       to,
       subject: 'Please confirm your registration!',
       text: '',
-      html: `<h2>Please, confirm you registration by visiting</h2> <a href="${TEMP_URL}/api/auth/verify/${verificationToken}">this link</a>`,
+      html: `<p>Please, <b>confirm you registration</b> by visiting</p> <a href="${URL}/api/auth/verify/${verificationToken}">this link</a>`,
     });
 
     return res;
