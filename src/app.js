@@ -7,6 +7,7 @@ const { adminRouter } = require('./routes/admin.routes');
 const { creatorsRouter } = require('./routes/creators.routes');
 const { categoriesRouter } = require('./routes/categories.routes');
 const ScheduleService = require('./services/schedule.service');
+const generateSuccessHtml = require('./utils/generateSuccessHtml');
 
 try {
   ScheduleService.loadRssPosts;
@@ -16,6 +17,7 @@ try {
 
 const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
+generateSuccessHtml();
 
 app.use(logger(formatsLogger));
 app.use(cors());
