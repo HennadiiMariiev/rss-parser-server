@@ -1,6 +1,13 @@
 const nodemailer = require('nodemailer');
 
-const { SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_USER, MODE, BACKEND_APP_URL } = require('../../config/config');
+const {
+  SMTP_HOST,
+  SMTP_PASSWORD,
+  SMTP_PORT,
+  SMTP_USER,
+  MODE,
+  BACKEND_APP_URL = 'https://lifehacker-rss-parser-server.herokuapp.com',
+} = require('../../config/config');
 
 class MailService {
   constructor() {
@@ -22,7 +29,7 @@ class MailService {
       to,
       subject: 'Please confirm your registration!',
       text: '',
-      html: `<p>Please, <b>confirm you registration</b> by visiting</p> <a href="${URL}/api/auth/verify/${verificationToken}">this link</a>`,
+      html: `<p>Please, <b>confirm you registration</b> by visiting <a href="${URL}/api/auth/verify/${verificationToken}" target="_blank">this link</a></p> `,
     });
 
     return res;
