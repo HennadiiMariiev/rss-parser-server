@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
+const compression = require('compression');
 
 // const { corsOptions } = require('./config/options');
 const { postsRouter } = require('./routes/posts.routes');
@@ -24,6 +25,7 @@ generateSuccessHtml();
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+app.use(compression());
 
 app.use('/api/posts', postsRouter);
 app.use('/api/auth', adminRouter);

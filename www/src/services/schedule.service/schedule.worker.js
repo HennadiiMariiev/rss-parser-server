@@ -47,9 +47,8 @@ const { prepareNewCreators, prepareNewCategories } = require('../../helpers/serv
     console.log('End parsing...' + '\n');
     console.timeEnd('parsing');
   } catch (error) {
-        if (error && error?.code !== 11000) console.log('Worker error: ', error);
+    if (error && error?.code !== 11000) console.log('Worker error: ', error);
   } finally {
-        parentPort.postMessage('Worker has just finished parsing...')
+    parentPort.postMessage('Worker has just finished parsing...');
   }
 })();
-

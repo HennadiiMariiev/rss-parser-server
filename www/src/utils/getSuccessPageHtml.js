@@ -114,8 +114,8 @@ function createHtml(url) {
             <h1 class="main-title">Congratulations!</h1>
             <h2 class="subtitle">You've successfully confirmed registration!</h2>
             <p class="text">You will be redirected to</p>
-            <a href="https://www.google.com" class="link"
-              >${url}</a
+            <a href="${url}" class="link"
+              >Lifehacker RSS parser APP</a
             >
     
             <p class="text">
