@@ -1,6 +1,10 @@
 const joi = require('joi');
 const PasswordComplexity = require('joi-password-complexity');
 
+const joiUserBodySchema = joi.object({
+  email: joi.string().email({ minDomainSegments: 2 }).required(),
+});
+
 const joiPostSchema = joi.object({
   _id: joi.string().hex().length(24),
 
@@ -18,7 +22,7 @@ const joiPostSchema = joi.object({
 
   image: joi.string().max(255),
 
-  user: joi.any(),
+  user: joiUserBodySchema,
 });
 
 const joiAdminSchema = joi.object({
@@ -40,13 +44,13 @@ const joiAdminSchema = joi.object({
 const joiOptionSchema = joi.object({
   name: joi.string().min(3).max(30).required(),
 
-  user: joi.any(),
+  user: joiUserBodySchema,
 });
 
 const joiObjectIdSchema = joi.object({
   id: joi.string().hex().length(24).required(),
 
-  user: joi.any(),
+  user: joiUserBodySchema,
 });
 
 module.exports = {

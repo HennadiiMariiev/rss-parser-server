@@ -5,7 +5,6 @@ const getAllPosts = async (req, res, next) => {
   const { posts, pagination } = await PostsService.getAllPosts(req);
 
   if (isErrorOrFalsyValue(posts)) {
-    console.log('!posts', posts);
     return next(posts);
   }
 
