@@ -7,14 +7,14 @@ const { postsRouter } = require('./routes/posts.routes');
 const { adminRouter } = require('./routes/admin.routes');
 const { creatorsRouter } = require('./routes/creators.routes');
 const { categoriesRouter } = require('./routes/categories.routes');
-const ScheduleService = require('./services/schedule.service');
+// const ScheduleService = require('./services/schedule.service');
 const generateSuccessHtml = require('./utils/generateSuccessHtml');
 
-try {
-  ScheduleService.loadRssPosts;
-} catch (error) {
-  console.log('ScheduleService.loadRssPosts', error);
-}
+// try {
+//   ScheduleService.loadRssPosts;
+// } catch (error) {
+//   console.log('ScheduleService.loadRssPosts', error);
+// }
 
 const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
