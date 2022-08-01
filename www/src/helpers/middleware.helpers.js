@@ -19,4 +19,12 @@ const validateObject = (obj, joiSchema, requiredFields = []) => {
 
 const isTokenExpiredError = (error) => error.toString().includes('TokenExpiredError');
 
-module.exports = { responseErrorOrNext, validateObject, isTokenExpiredError };
+const extractUserEmail = (user) => {
+  if('email' in user) {
+    return { email: user.email };
+  }
+
+  return {};
+}
+
+module.exports = { responseErrorOrNext, validateObject, isTokenExpiredError, extractUserEmail };

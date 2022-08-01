@@ -15,7 +15,6 @@ const validateNewOption = async (req, res, next) => {
 
 const validateOptionId = async (req, res, next) => {
   try {
-    console.log(req.params);
     const ids = req.params?.ids;
     if (!Array.isArray(ids.split(','))) {
       next(new BadRequest('No ids found'));

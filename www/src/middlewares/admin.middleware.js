@@ -5,7 +5,7 @@ const { responseErrorOrNext, validateObject } = require('../helpers/middleware.h
 const { joiAdminSchema } = require('../model/joi.schemas');
 const { Admin } = require('../model/admin.schema');
 const { JWT_ACCESS_SECRET } = require('../config/config');
-const { isTokenExpiredError } = require('../helpers/middleware.helpers');
+const { isTokenExpiredError, extractUserEmail } = require('../helpers/middleware.helpers');
 
 const userLoginValidation = async (req, res, next) => {
   const requiredFields = ['email', 'password'];
@@ -64,7 +64,7 @@ const authenticateUser = async (req, _, next) => {
       return next(new NotFound('User not found'));
     }
 
-    req.body.user = user;
+    req.body.user = extractUserEmail(user);
   } catch (error) {
     isTokenExpiredError(error) ? next(new Unauthorized(`Unauthorized: ${error}`)) : next(error);
   }
