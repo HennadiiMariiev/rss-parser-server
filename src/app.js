@@ -3,6 +3,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const compression = require('compression');
 
+const { closeDbConnection } = require('./config/db.connect');
 const { postsRouter } = require('./routes/posts.routes');
 const { adminRouter } = require('./routes/admin.routes');
 const { creatorsRouter } = require('./routes/creators.routes');
@@ -37,5 +38,7 @@ app.use((err, _, res, next) => {
   const { status: code = 500, message = 'Internal server error' } = err;
   res.status(code).json({ message, status: 'error', code });
 });
+
+process.on('SIGINT', closeDbConnection);
 
 module.exports = { app };

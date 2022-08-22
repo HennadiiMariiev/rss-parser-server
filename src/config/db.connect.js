@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 const { DB_NAME, DB_URL } = require('./config');
 
 const connectDatabase = async () => {
-  await mongoose.connect(DB_URL, { dbName: DB_NAME });
+  return await mongoose.connect(DB_URL, { dbName: DB_NAME, socketTimeoutMS: 60 * 1000 });
 };
 
-const disconnectDatabase = async () => {
-  await mongoose.connection.close();
+const closeDbConnection = () => {
+  mongoose.connection.close(function () {
+    console.log('Mongoose disconnected on app termination');
+    process.exit(0);
+  });
 };
 
-module.exports = { connectDatabase, disconnectDatabase };
+module.exports = { connectDatabase, closeDbConnection };
