@@ -7,7 +7,7 @@ const connectDatabase = async () => {
 
 const closeDbConnection = () => {
   mongoose.connection.close(function () {
-    console.log('Mongoose disconnected on app termination');
+    console.log('DB disconnected on app termination');
     process.exit(0);
   });
 };

@@ -15,16 +15,13 @@ const workerFilePath = path.resolve(__dirname, 'schedule.worker.js');
 const loadRssPosts = schedule.scheduleJob(TEMP_SCHEDULE, async () => {
   try {
     const worker = new Worker(workerFilePath);
-
     worker.on('message', (data) => {
       if (!data) {
         console.log('schedule.scheduleJob: Can`t parse RSS.');
         return;
       }
-      console.log(data);
 
       const { newCreators, newCategories, rssDataArray } = data;
-
       Category.insertMany(newCategories, { ordered: false }, (err) => {
         if (err && err?.code !== 11000) console.log(err);
       });
@@ -39,7 +36,6 @@ const loadRssPosts = schedule.scheduleJob(TEMP_SCHEDULE, async () => {
           const creator = await Creator.findOne({ name: post.creator });
           const categories = await Category.find({ name: { $in: post.categories } }, '_id');
           const newPost = new Post({ ...post, creator, categories });
-          console.log('new post: ', newPost?.title);
 
           await newPost.save((err) => {
             if (err && err?.code !== 11000) console.log('New Post insertion error:', err);

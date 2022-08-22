@@ -22,8 +22,6 @@ const { prepareNewCreators, prepareNewCategories } = require('../../helpers/serv
     console.timeEnd('parsing');
     parentPort.postMessage({ newCreators, newCategories, rssDataArray });
   } catch (error) {
-    if (error && error?.code !== 11000) console.log('Worker error: ', error);
-  } finally {
-    parentPort.postMessage('Worker has just finished parsing...');
+    console.log('Worker error: ', error);
   }
 })();
