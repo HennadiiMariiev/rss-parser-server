@@ -1,14 +1,9 @@
 version: '3.7'
 
-# networks:
-#   internal:
-#   api:
-#     external: true
-
 services:
-  &node-service node:
-    container_name: *node-service
-    hostname: *node-service
+  node:
+    container_name: node
+    hostname: node
     restart: unless-stopped
     user: '${CURRENT_USER_ID}:${CURRENT_USER_ID}'
     build: 
@@ -18,6 +13,17 @@ services:
     working_dir: "/home/node/app"
     volumes: 
       - "../www:/home/node/app"
-    # networks:
-    #   internal:
-    #   api:
+    links:
+      - mongo-db
+
+  mongo-db:
+    container_name: mongo-db
+    image: mongo
+    ports:
+      - "27017:27017"
+    # seeding DB with mock data 
+    volumes:
+      - ../www/mock_data:/docker-entrypoint-initdb.d
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password

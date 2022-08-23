@@ -1,6 +1,6 @@
 const { app } = require('../app');
+const { PORT = 4000 } = require('../config/config');
 const { connectDatabase } = require('../config/db.connect');
-const { PORT } = require('../config/config');
 
 const start = async () => {
   try {

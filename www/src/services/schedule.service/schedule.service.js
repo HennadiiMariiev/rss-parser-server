@@ -5,14 +5,11 @@ const { Worker } = require('worker_threads');
 const { Post } = require('../../model/post.schema');
 const { Creator } = require('../../model/creator.schema');
 const { Category } = require('../../model/category.schema');
-const { RSS_NODE_SCHEDULE = '0 */6 * * *' } = require('../../config/config');
-
-// const TEMP_SCHEDULE = '*/30 * * * *';
-const TEMP_SCHEDULE = '* * * * *';
+const { RSS_NODE_SCHEDULE = '0 * * * *' } = require('../../config/config');
 
 const workerFilePath = path.resolve(__dirname, 'schedule.worker.js');
 
-const loadRssPosts = schedule.scheduleJob(TEMP_SCHEDULE, async () => {
+const loadRssPosts = schedule.scheduleJob(RSS_NODE_SCHEDULE, async () => {
   try {
     const worker = new Worker(workerFilePath);
     worker.on('message', (data) => {
