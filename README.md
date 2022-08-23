@@ -33,11 +33,11 @@ The App Server is currently located on [heroku](https://www.heroku.com) platform
 ## Docker and Makefile
 
 This is containerized app. Please, check out `./Makefile` with most used commands for quick application start.
-`make up` | Start all containers (in background)
-`make down` | Stop all started containers
-`make shell-once` | Start node container
-`make run-start` | Start node container and start app
-`make run-dev` | Start node container and start app in development mode
+- `make up` | Start all containers (in background)
+- `make down` | Stop all started containers
+- `make shell-once` | Start node container
+- `make run-start` | Start node container and start app
+- `make run-dev` | Start node container and start app in development mode
 
 ### Please, feel free to use this repo)) 
 Clone it, install dependencies, paste your environment variables described in .env-example files and run the app.
