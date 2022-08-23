@@ -20,7 +20,7 @@ App is based on [express-framework](http://expressjs.com) and written on vanilla
 ## App Functionality
 
 This app parses **lifehacker RSS** for new posts by schedule and stores data in MongoDB. The RSS parsing is configured with cron-like schedule (by default it performs parsing every hour). For comfortable hand-shaking with this app, the database is seeded with mock data on container's start. Unauthorized users can get all posts using pagination, filter by creators and categories, sort by date and title, search by title and description as well. Registered and authorized users (admins) can perform CRUD operations on posts, categories and creators. After successful registration, new admin receives an email for confirmation.
-# N.B.!:
+### N.B.!:
 
 If you want to **sign in** as admin in dev mode without email verification, feel free to use next credentials (no worries: this won't hurt any app's security - this works only in container and local database):
  - **email**: __admin@gmail.com__
