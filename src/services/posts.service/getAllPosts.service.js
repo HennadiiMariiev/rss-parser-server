@@ -13,7 +13,7 @@ const {
 
 const getAllPosts = async (req) => {
   try {
-    const paginationOptions = { page: 1, limit: 25 };
+    const paginationOptions = { page: 1, limit: 24 };
     const searchOptions = {};
     const sortOptions = {};
     let filterOptions = {};
@@ -48,7 +48,8 @@ const getAllPosts = async (req) => {
       paginationOptions
     )
       .sort(sortOptions)
-      .populate('creator categories', 'name');
+      .populate('creator categories', 'name')
+      .lean();
 
     const total =
       searchOptions.search || Object.keys(filterOptions).length
@@ -56,8 +57,8 @@ const getAllPosts = async (req) => {
             searchOptions.search ? { $text: { $search: searchOptions.search } } : filterOptions,
             null,
             paginationOptions
-          )
-        : await Post.count({});
+          ).lean()
+        : await Post.count({}).lean();
 
     return { posts, pagination: { page: paginationOptions.page, limit: paginationOptions.limit, total } };
   } catch (error) {
