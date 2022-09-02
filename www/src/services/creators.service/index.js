@@ -11,7 +11,7 @@ const removeAllCreators = async () => {
 
 const getAllCreators = async () => {
   try {
-    return await Creator.find({}).sort('name');
+    return await Creator.find({}).sort('name').lean();
   } catch (error) {
     return error;
   }
