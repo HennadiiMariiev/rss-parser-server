@@ -11,7 +11,7 @@ const removeAllCategories = async () => {
 
 const getAllCategories = async () => {
   try {
-    return await Category.find({}).sort('name');
+    return await Category.find({}).sort('name').lean();
   } catch (error) {
     return error;
   }
