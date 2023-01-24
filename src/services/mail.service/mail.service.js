@@ -6,7 +6,7 @@ const {
   SMTP_PORT,
   SMTP_USER,
   MODE,
-  BACKEND_APP_URL = 'https://lifehacker-rss-parser-server.herokuapp.com',
+  BACKEND_APP_URL = 'https://rss-parser-server.onrender.com',
 } = require('../../config/config');
 
 class MailService {
