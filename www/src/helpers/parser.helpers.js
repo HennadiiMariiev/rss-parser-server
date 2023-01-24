@@ -27,7 +27,7 @@ function getImgAndDescription(itemStr) {
   const descrStartIdx = itemStr.indexOf('<p>');
   const descrEndIdx = itemStr.indexOf('</p>', descrStartIdx);
 
-  const imgStartIdx = itemStr.indexOf('<img src="');
+  const imgStartIdx = itemStr.indexOf('src="');
   const imgEndIdx = itemStr.indexOf('" /--><', imgStartIdx);
 
   if (descrStartIdx !== -1 && descrEndIdx !== -1) {
@@ -35,7 +35,7 @@ function getImgAndDescription(itemStr) {
   }
 
   if (imgStartIdx !== -1 && imgEndIdx !== -1) {
-    image = itemStr.slice(imgStartIdx + '<img src="'.length, imgEndIdx);
+    image = itemStr.slice(imgStartIdx + 'src="'.length, imgEndIdx);
   }
 
   return { description, image };
