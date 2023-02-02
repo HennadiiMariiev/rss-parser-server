@@ -1,6 +1,8 @@
 const { Category } = require('../../model/category.schema');
 const { BadRequest } = require('http-errors');
 
+const { isValidPaginationInRequest, getPageAndLimitFromRequest } = require('../../helpers/service.helpers');
+
 const removeAllCategories = async () => {
   try {
     return await Category.deleteMany({});
@@ -9,9 +11,23 @@ const removeAllCategories = async () => {
   }
 };
 
-const getAllCategories = async () => {
+const getAllCategories = async (req) => {
   try {
-    return await Category.find({}).sort('name').lean();
+    const paginationOptions = { page: 1, limit: 20 };
+
+    if (isValidPaginationInRequest(req)) {
+      const { page, limit } = getPageAndLimitFromRequest(req);
+
+      paginationOptions.skip = (page - 1) * limit;
+      paginationOptions.limit = limit;
+      paginationOptions.page = page;
+    }
+
+    const categories = await Category.find({}).sort('name').lean();
+    // const categories = await Category.find({}, null, paginationOptions).sort('name').lean();
+    const total = await Category.find({}).count();
+
+    return { categories, pagination: { page: paginationOptions.page, limit: paginationOptions.limit, total } };
   } catch (error) {
     return error;
   }

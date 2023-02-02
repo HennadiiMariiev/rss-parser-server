@@ -91,7 +91,7 @@ const getPageAndLimitFromRequest = (req) => {
 const getSearchFromRequest = (req) => {
   try {
     const parsedSearch = JSON.parse(req.query.search);
-    return parsedSearch['search'];
+    return (parsedSearch['search'] ?? '').toLowerCase();
   } catch (error) {
     console.log('getSearchFromRequest: ', error);
   }
