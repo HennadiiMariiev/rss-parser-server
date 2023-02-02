@@ -11,14 +11,14 @@ const addCategory = async (req, res, next) => {
   res.status(201).json({ message: 'success', data: category });
 };
 
-const getAllCategories = async (_, res, next) => {
-  const categories = await CategoryService.getAllCategories();
+const getAllCategories = async (req, res, next) => {
+  const { categories, pagination } = await CategoryService.getAllCategories(req);
 
   if (isErrorOrFalsyValue(categories)) {
     return next(categories);
   }
 
-  res.status(200).json({ message: 'success', data: { categories, total: categories.length } });
+  res.status(200).json({ message: 'success', data: { categories, pagination } });
 };
 
 const removeCategoriesByIds = async (req, res, next) => {

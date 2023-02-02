@@ -11,14 +11,14 @@ const addCreator = async (req, res, next) => {
   res.status(201).json({ message: 'success', data: creator });
 };
 
-const getAllCreators = async (_, res, next) => {
-  const creators = await CreatorService.getAllCreators();
+const getAllCreators = async (req, res, next) => {
+  const { creators, pagination } = await CreatorService.getAllCreators(req);
 
   if (isErrorOrFalsyValue(creators)) {
     return next(creators);
   }
 
-  res.status(200).json({ message: 'success', data: { creators, total: creators.length } });
+  res.status(200).json({ message: 'success', data: { creators, pagination } });
 };
 
 const removeCreatorsByIds = async (req, res, next) => {

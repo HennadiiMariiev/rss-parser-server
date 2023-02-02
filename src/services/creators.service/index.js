@@ -1,5 +1,6 @@
 const { Creator } = require('../../model/creator.schema');
 const { BadRequest } = require('http-errors');
+const { isValidPaginationInRequest, getPageAndLimitFromRequest } = require('../../helpers/service.helpers');
 
 const removeAllCreators = async () => {
   try {
@@ -9,9 +10,23 @@ const removeAllCreators = async () => {
   }
 };
 
-const getAllCreators = async () => {
+const getAllCreators = async (req) => {
   try {
-    return await Creator.find({}).sort('name').lean();
+    const paginationOptions = { page: 1, limit: 20 };
+
+    if (isValidPaginationInRequest(req)) {
+      const { page, limit } = getPageAndLimitFromRequest(req);
+
+      paginationOptions.skip = (page - 1) * limit;
+      paginationOptions.limit = limit;
+      paginationOptions.page = page;
+    }
+
+    const creators = await Creator.find({}).sort('name').lean();
+    // const creators = await Creator.find({}, null, paginationOptions).sort('name').lean();
+    const total = await Creator.find({}).count();
+
+    return { creators, pagination: { page: paginationOptions.page, limit: paginationOptions.limit, total } };
   } catch (error) {
     return error;
   }
